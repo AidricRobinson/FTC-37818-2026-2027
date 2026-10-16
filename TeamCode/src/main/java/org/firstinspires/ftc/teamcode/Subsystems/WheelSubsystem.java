@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 public class WheelSubsystem {
@@ -31,10 +32,10 @@ public class WheelSubsystem {
         FRMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         BRMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         // Motor spin sides
-        FLMotor.setDirection( DcMotorEx.Direction.FORWARD);
+        FLMotor.setDirection( DcMotorEx.Direction.REVERSE);
         BLMotor.setDirection( DcMotorEx.Direction.FORWARD);
-        FRMotor.setDirection( DcMotorEx.Direction.FORWARD);
-        BRMotor.setDirection( DcMotorEx.Direction.FORWARD);
+        FRMotor.setDirection( DcMotorEx.Direction.REVERSE);
+        BRMotor.setDirection( DcMotorEx.Direction.REVERSE);
     }
     public void setFLPower(double power){
         FLMotor.setPower(power);
