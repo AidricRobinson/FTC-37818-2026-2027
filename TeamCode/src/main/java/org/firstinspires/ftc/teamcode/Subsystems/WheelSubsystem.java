@@ -55,18 +55,18 @@ public class WheelSubsystem {
         double x = gamepad.left_stick_x;
         double rx = gamepad.right_stick_x;
 
-        if (gamepad.right_bumper){
-            FLMotor.setPower((y + x + rx)/2);
-            FRMotor.setPower((y - x - rx)/2);
-            BLMotor.setPower((y - x + rx)/2);
-            BRMotor.setPower((y + x - rx)/2);
-        }
-        else {
-            FLMotor.setPower(y + x + rx);
-            FRMotor.setPower(y - x - rx);
-            BLMotor.setPower(y - x + rx);
-            BRMotor.setPower(y + x - rx);
-        }
+//        if (gamepad.right_bumper){
+            FLMotor.setPower((y - x + rx)/3);
+            FRMotor.setPower((y + x - rx)/3);
+            BLMotor.setPower((y + x + rx)/3);
+            BRMotor.setPower((y - x - rx)/3);
+//        }
+//        else {
+//            FLMotor.setPower(y + x + rx);
+//            FRMotor.setPower(y - x - rx);
+//            BLMotor.setPower(y - x + rx);
+//            BRMotor.setPower(y + x - rx);
+//        }
 
     }
 

@@ -38,7 +38,7 @@ public class TestTeleOp extends OpMode {
 //        standardServoSubsystem = new StandardServoSubsystem(this);
         flywheelCommand2 = new FlywheelCommand(flywheelSubsystem2, gamepad1);
         intakeCommand = new IntakeCommand(intakeSubsystem, gamepad1);
-        storageCommand = new StorageCommand(storageSubsystem, gamepad2);
+        storageCommand = new StorageCommand(storageSubsystem, gamepad1);
         wheelSubsystem = new WheelSubsystem(this);
 //        standardServoCommand = new StandardServoCommand(standardServoSubsystem, gamepad2);
 
@@ -48,9 +48,9 @@ public class TestTeleOp extends OpMode {
     @Override
     public void loop(){
         flywheelCommand2.operate(gamepad1);
-        storageCommand.operate(gamepad2);
+        storageCommand.operate(gamepad1);
         wheelSubsystem.operate(gamepad1);
-        intakeCommand.operate(gamepad2);
+        intakeCommand.operate(gamepad1);
 //        standardServoCommand.operate(gamepad2);
 
     }

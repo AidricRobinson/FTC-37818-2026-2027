@@ -13,12 +13,12 @@ public class FlywheelCommand {
         this.gamepad = gamepad;
     }
     public void operate(Gamepad gamepad){
-        if (gamepad.x){
-            flywheelSubsystem2.setFlywheelPower(1);//tbd
+        if (gamepad.right_trigger_pressed){
+            flywheelSubsystem2.setFlywheelPower(0.6);//tbd
         }
-        else if(gamepad.y){
-            flywheelSubsystem2.setFlywheelPower(0.5);
-        }
+//        else if(gamepad.y){
+//            flywheelSubsystem2.setFlywheelPower(0.5);
+//        }
         else {
             flywheelSubsystem2.setFlywheelPower(0);
         }

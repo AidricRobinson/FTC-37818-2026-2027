@@ -12,11 +12,14 @@ public class StorageCommand {
         this.gamepad = gamepad;
     }
     public void operate(Gamepad gamepad){
-        if (gamepad.y){
-            storageSubsystem.setStoragePower(1);//tbd
-        }
-        else if(gamepad.a){
-            storageSubsystem.setStoragePower(-0.5);
+//        if (gamepad.y){
+//            storageSubsystem.setStoragePower(1);//tbd
+//        }
+//        else if(gamepad.a){
+//            storageSubsystem.setStoragePower(-0.5);
+//        }
+        if(gamepad.right_bumper){
+            storageSubsystem.setStoragePower(1);
         }
         else {
             storageSubsystem.setStoragePower(0);

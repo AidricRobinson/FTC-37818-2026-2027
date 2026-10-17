@@ -11,12 +11,12 @@ public class IntakeCommand {
         this.gamepad = gamepad;
     }
     public void operate(Gamepad gamepad){
-        if (gamepad.dpad_down){
+        if (gamepad.left_trigger_pressed){
             intakeSubsystem.setFlywheelPower(1);//tbd
         }
-        else if(gamepad.dpad_up){
-            intakeSubsystem.setFlywheelPower(-0.5);
-        }
+//        else if(gamepad.dpad_up){
+//            intakeSubsystem.setFlywheelPower(-0.5);
+//        }
         else {
             intakeSubsystem.setFlywheelPower(0);
         }

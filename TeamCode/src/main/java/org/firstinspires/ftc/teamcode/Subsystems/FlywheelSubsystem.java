@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 public class FlywheelSubsystem {
     DcMotorEx FlywheelMotor;
 
     public FlywheelSubsystem(OpMode opMode) {
         FlywheelMotor  = opMode.hardwareMap.get(DcMotorEx.class, "Flywheel");
-//        FlywheelMotor.setDirection(Constants.MotorConstants.shooterDirection);
+        FlywheelMotor.setDirection(DcMotorEx.Direction.REVERSE);
 //        FlywheelMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
 //        FlywheelMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
     }
