@@ -10,7 +10,6 @@ public class StorageSubsystem {
     }
     public void setStoragePower(double power){
         storageServo.setPower(power);
-
     }
     public void shutdown(){
         storageServo.setPower(0);
