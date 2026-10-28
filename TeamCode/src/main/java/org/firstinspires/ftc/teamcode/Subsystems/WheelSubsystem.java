@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class WheelSubsystem {
 
 //    BNO055IMU imu;
@@ -13,6 +15,8 @@ public class WheelSubsystem {
     DcMotorEx FRMotor;
     DcMotorEx BLMotor;
     DcMotorEx BRMotor;
+    boolean toggle;
+    boolean slowMode;
 
 
 
@@ -36,6 +40,9 @@ public class WheelSubsystem {
         BLMotor.setDirection( DcMotorEx.Direction.FORWARD);
         FRMotor.setDirection( DcMotorEx.Direction.REVERSE);
         BRMotor.setDirection( DcMotorEx.Direction.REVERSE);
+
+        toggle = false;
+        slowMode = false;
     }
     public void setFLPower(double power){
         FLMotor.setPower(power);
@@ -50,23 +57,43 @@ public class WheelSubsystem {
         BRMotor.setPower(power);
     }
 
-    public void operate(Gamepad gamepad) {
+    public void operate(Gamepad gamepad, Telemetry telemetry) {
         double y = gamepad.left_stick_y;
         double x = gamepad.left_stick_x;
         double rx = gamepad.right_stick_x;
 
-//        if (gamepad.right_bumper){
-            FLMotor.setPower((y - x + rx)/3);
-            FRMotor.setPower((y + x - rx)/3);
-            BLMotor.setPower((y + x + rx)/3);
-            BRMotor.setPower((y - x - rx)/3);
-//        }
-//        else {
-//            FLMotor.setPower(y + x + rx);
-//            FRMotor.setPower(y - x - rx);
-//            BLMotor.setPower(y - x + rx);
-//            BRMotor.setPower(y + x - rx);
-//        }
+
+            FLMotor.setPower((y - x + rx));
+            FRMotor.setPower((y + x - rx));
+            BLMotor.setPower((y + x + rx));
+            BRMotor.setPower((y - x - rx));
+
+//
+//            if(gamepad.right_bumper && !toggle) {
+//                toggle = true;
+//            }
+//            else if(!gamepad.right_bumper){
+//                toggle = false;
+//            }
+//
+//                if (toggle) {
+//                    FLMotor.setPower((y - x + rx) / 2);
+//                    FRMotor.setPower((y + x - rx) / 2);
+//                    BLMotor.setPower((y + x + rx) / 2);
+//                    BRMotor.setPower((y - x - rx) / 2);
+//                } else {
+//                    FLMotor.setPower((y - x + rx));
+//                    FRMotor.setPower((y + x - rx));
+//                    BLMotor.setPower((y + x + rx));
+//                    BRMotor.setPower((y - x - rx));
+//                }
+
+
+
+
+//
+//            telemetry.addData("SlowMode:", true);
+//            telemetry.update();
 
     }
 
