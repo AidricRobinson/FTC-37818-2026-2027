@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Commands.Manual.Test.*;
+import org.firstinspires.ftc.teamcode.Commands.TestCommands.TestFlywheelCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.*;
 
 
@@ -11,8 +12,16 @@ import org.firstinspires.ftc.teamcode.Subsystems.*;
 
 public class TestTeleOp extends OpMode {
     //declaring subsystems and commands here
-//    private StandardServoSubsystem standardServoSubsystem;
-//    private StandardServoCommand standardServoCommand;
+    private FlywheelSubsystem flywheelSubsystem2;
+    private IntakeSubsystem intakeSubsystem;
+    private StorageSubsystem storageSubsystem;
+    private FlywheelCommand flywheelCommand2;
+    private IntakeCommand intakeCommand;
+    private StorageCommand storageCommand;
+    private WheelSubsystem wheelSubsystem;
+    private StandardServoSubsystem standardServoSubsystem;
+    private StandardServoCommand standardServoCommand;
+    private TestFlywheelCommand testFlywheelCommand;
 
 
 
@@ -20,20 +29,35 @@ public class TestTeleOp extends OpMode {
 
     public void init () {
 
-
-//        standardServoSubsystem = new StandardServoSubsystem(this);
-//        standardServoCommand = new StandardServoCommand(standardServoSubsystem, gamepad2);
+        flywheelSubsystem2 = new FlywheelSubsystem(this);
+        intakeSubsystem = new IntakeSubsystem(this);
+        storageSubsystem = new StorageSubsystem(this);
+        standardServoSubsystem = new StandardServoSubsystem(this);
+        flywheelCommand2 = new FlywheelCommand(flywheelSubsystem2, gamepad1);
+        intakeCommand = new IntakeCommand(intakeSubsystem, gamepad1);
+        storageCommand = new StorageCommand(storageSubsystem, gamepad1);
+        wheelSubsystem = new WheelSubsystem(this);
+        standardServoCommand = new StandardServoCommand(standardServoSubsystem, gamepad2);
+        testFlywheelCommand = new TestFlywheelCommand(flywheelSubsystem2, gamepad2);
 
     }
     // //test comment
 
     @Override
     public void loop(){
-
-//        standardServoCommand.operate(gamepad2);
+        flywheelCommand2.operate(gamepad1);
+        storageCommand.operate(gamepad1);
+        wheelSubsystem.operate(gamepad1, telemetry);
+        intakeCommand.operate(gamepad1);
+        standardServoCommand.operate(gamepad1);
+        testFlywheelCommand.operate(gamepad2, telemetry);
 
     }
     public void stop(){
-      //Put shutdowns here
-   }
+        flywheelSubsystem2.shutdown();
+        wheelSubsystem.shutdown();
+        storageCommand.shutdown();
+        intakeCommand.shutdown();
+
+    }
 }

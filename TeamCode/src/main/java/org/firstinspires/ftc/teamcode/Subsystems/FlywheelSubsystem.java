@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode.Constants;
 
 public class FlywheelSubsystem {
     DcMotorEx FlywheelMotor;
@@ -11,11 +14,14 @@ public class FlywheelSubsystem {
         FlywheelMotor  = opMode.hardwareMap.get(DcMotorEx.class, "Flywheel");
         FlywheelMotor.setDirection(DcMotorEx.Direction.REVERSE);
         testOutput = 0;
-//        FlywheelMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
-//        FlywheelMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
+        FlywheelMotor.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        FlywheelMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.FLOAT);
     }
     public void setFlywheelPower(double power){
         FlywheelMotor.setPower(power);
+    }
+    public double getRPM(){
+        return FlywheelMotor.getVelocity() / Constants.MotorConstants.FLYWHEEL_TICKS_PER_ROTATION * 60;
     }
 //    public double getFlywheelEncoder(){
 //        return FlywheelMotor.getCurrentPosition();
@@ -42,6 +48,7 @@ public class FlywheelSubsystem {
     public double getTestOutput(){
         return testOutput;
     }
+
 
 
 // //mayb

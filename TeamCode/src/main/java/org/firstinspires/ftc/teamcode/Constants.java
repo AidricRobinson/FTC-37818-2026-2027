@@ -16,5 +16,6 @@ public class Constants {
     public static class MotorConstants {
         public static final DcMotorEx.Direction shooterDirection = DcMotorEx.Direction.FORWARD;
         public static final DcMotorEx.Direction intakeDirection = DcMotorEx.Direction.FORWARD;
+        public static final double FLYWHEEL_TICKS_PER_ROTATION = 28;
     }
 }
