@@ -14,7 +14,7 @@ public class FlywheelCommand {
     }
     public void operate(Gamepad gamepad){
         if (gamepad.right_trigger_pressed){
-            flywheelSubsystem2.setFlywheelPower(0.8);//tbd
+            flywheelSubsystem2.setFlywheelPower(0.55);//tbd
         }
 //        else if(gamepad.y){
 //            flywheelSubsystem2.setFlywheelPower(0.5);

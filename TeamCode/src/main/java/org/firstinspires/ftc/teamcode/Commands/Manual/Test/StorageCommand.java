@@ -18,7 +18,7 @@ public class StorageCommand {
 //        else if(gamepad.a){
 //            storageSubsystem.setStoragePower(-0.5);
 //        }
-        if(gamepad.right_bumper){
+        if(gamepad.left_trigger_pressed){
             storageSubsystem.setStoragePower(1);
         }
         else {
