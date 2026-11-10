@@ -1,34 +1,43 @@
 package org.firstinspires.ftc.teamcode.Subsystems;
 
+import com.qualcomm.hardware.bosch.BHI260IMU;
 import com.qualcomm.hardware.bosch.BNO055IMU;
+
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 public class WheelSubsystem {
 
-    BNO055IMU imu;
+    IMU imu;
     DcMotorEx FLMotor;
     DcMotorEx FRMotor;
     DcMotorEx BLMotor;
     DcMotorEx BRMotor;
     boolean toggle;
     boolean slowMode;
+    YawPitchRollAngles robotOrientation;
+
+
 
 
 
     public WheelSubsystem(OpMode opMode) {
 
-        imu = opMode.hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-        imu.initialize(parameters);
+        imu = opMode.hardwareMap.get(IMU.class, "imu");
+        IMU.Parameters IMUparameters = new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
+        imu.initialize(IMUparameters);
+        robotOrientation = imu.getRobotYawPitchRollAngles();
 
         FLMotor = opMode.hardwareMap.get(DcMotorEx.class, "FL");
         FRMotor = opMode.hardwareMap.get(DcMotorEx.class, "FR");
@@ -72,52 +81,78 @@ public class WheelSubsystem {
         ///////////////////////////////////////////////////////////////////////
         ///              CURRENTLY IN SHAMBLES, FIX AFTER COMP             ///
         ///////////////////////////////////////////////////////////////////////
-        double rotY = gamepad.left_stick_y;
-        double rotX = gamepad.left_stick_x;
+        double y = gamepad.left_stick_y;
+        double x = -gamepad.left_stick_x; //PLS fix
         double rx = -gamepad.right_stick_x; //PLEASE FIX LATER
 
         double botHeading = getYaw();
 
         //actual field oriented
-        double x = rotX * Math.cos(botHeading) + rotY * Math.sin(botHeading);
-        double y = rotY * Math.cos(botHeading) - rotX * Math.sin(botHeading);
+        double rotX = x * Math.cos(botHeading) + y * Math.sin(botHeading);
+        double rotY = y * Math.cos(botHeading) - x * Math.sin(botHeading);
 
-        double denominator = Math.max(Math.abs(x) + Math.abs(y) + Math.abs(rx), 1);
+        double denominator = Math.max(Math.abs(rotX) + Math.abs(rotY) + Math.abs(rx), 1);
 
 
         if (gamepad.right_bumper) {
-            FLMotor.setPower((y - x + rx) / 2);
-            FRMotor.setPower((y + x - rx) / 2);
-            BLMotor.setPower((y + x + rx) / 2);
-            BRMotor.setPower((y - x - rx) / 2);
+            FLMotor.setPower((rotY - rotX + rx) / 2);
+            FRMotor.setPower((rotY + rotX - rx) / 2);
+            BLMotor.setPower((rotY + rotX + rx) / 2);
+            BRMotor.setPower((rotY - rotX - rx) / 2);
         } else {
-            FLMotor.setPower((y - x + rx));
-            FRMotor.setPower((y + x - rx));
-            BLMotor.setPower((y + x + rx));
-            BRMotor.setPower((y - x - rx));
+            FLMotor.setPower((rotY - rotX + rx));
+            FRMotor.setPower((rotY + rotX - rx));
+            BLMotor.setPower((rotY + rotX + rx));
+            BRMotor.setPower((rotY - rotX - rx));
         }
+        telemetry.addData("yaw", getYaw());
+        telemetry.update();
     }
     public void robotOrientedOperate(Gamepad gamepad, Telemetry telemetry) {
         //////////////////////////////////////////////////////////////////////
         ///              CURRENTLY IN SHAMBLES, FIX AFTER COMP             ///
         //////////////////////////////////////////////////////////////////////
-
+//
+//        double y = gamepad.left_stick_y;
+//        double x = gamepad.left_stick_x;
+//        double rx = -gamepad.right_stick_x; //PLEASE FIX LATER
+//
+//        double denominator = Math.max(Math.abs(x) + Math.abs(y) + Math.abs(rx), 1);
+//
+//        if (gamepad.right_bumper) {
+//            FLMotor.setPower((y - x + rx) / 2);
+//            FRMotor.setPower((y + x - rx) / 2);
+//            BLMotor.setPower((y + x + rx) / 2);
+//            BRMotor.setPower((y - x - rx) / 2);
+//        } else {
+//            FLMotor.setPower((y - x + rx));
+//            FRMotor.setPower((y + x - rx));
+//            BLMotor.setPower((y + x + rx));
+//            BRMotor.setPower((y - x - rx));
+//        }
         double y = gamepad.left_stick_y;
-        double x = gamepad.left_stick_x;
+        double x = -gamepad.left_stick_x;
         double rx = -gamepad.right_stick_x; //PLEASE FIX LATER
 
-        double denominator = Math.max(Math.abs(x) + Math.abs(y) + Math.abs(rx), 1);
+        double botHeading = getYaw();
+
+        //actual field oriented
+        double rotX = x * Math.cos(botHeading) + y * Math.sin(botHeading);
+        double rotY = y * Math.cos(botHeading) - x * Math.sin(botHeading);
+
+        double denominator = Math.max(Math.abs(rotX) + Math.abs(rotY) + Math.abs(rx), 1);
+
 
         if (gamepad.right_bumper) {
-            FLMotor.setPower((y - x + rx) / 2);
-            FRMotor.setPower((y + x - rx) / 2);
-            BLMotor.setPower((y + x + rx) / 2);
-            BRMotor.setPower((y - x - rx) / 2);
+            FLMotor.setPower((rotY - rotX + rx) / 2);
+            FRMotor.setPower((rotY + rotX - rx) / 2);
+            BLMotor.setPower((rotY + rotX + rx) / 2);
+            BRMotor.setPower((rotY - rotX - rx) / 2);
         } else {
-            FLMotor.setPower((y - x + rx));
-            FRMotor.setPower((y + x - rx));
-            BLMotor.setPower((y + x + rx));
-            BRMotor.setPower((y - x - rx));
+            FLMotor.setPower((rotY - rotX + rx));
+            FRMotor.setPower((rotY + rotX - rx));
+            BLMotor.setPower((rotY + rotX + rx));
+            BRMotor.setPower((rotY - rotX - rx));
         }
 
     }
@@ -146,7 +181,7 @@ public class WheelSubsystem {
         BRMotor.setPower(0);
     }
     public double getYaw(){
-        return imu.getAngularOrientation(AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES).thirdAngle;
+        return robotOrientation.getYaw();
     }
 
 
