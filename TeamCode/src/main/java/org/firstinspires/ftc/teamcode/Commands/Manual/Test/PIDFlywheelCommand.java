@@ -20,15 +20,15 @@ public class PIDFlywheelCommand {
     public PIDFlywheelCommand(FlywheelSubsystem flywheelSubsystem2, Gamepad gamepad){
         this.flywheelSubsystem2 = flywheelSubsystem2;
         this.gamepad = gamepad;
-        pidController = new PIDController(0.007,0.03);
-        pidController.setSetPoint(3000);
-        kp = 0.008;
+//        pidController = new PIDController(0.007,0.03);
+//        pidController.setSetPoint(3000);
+        kp = 0.0065;
         kff = 0.0002;
-        setpoint = 3000;
+        setpoint = 2500;
         error = 0;
     }
     public void operate(Gamepad gamepad, Telemetry telemetry){
-        if (gamepad.right_trigger_pressed) {
+        if (gamepad.x) {
 //            if (pidController.calculateError(flywheelSubsystem2.getRPM()) > 0){
             error = setpoint - flywheelSubsystem2.getRPM();
             output = (kp * error) +  (kff * setpoint);
