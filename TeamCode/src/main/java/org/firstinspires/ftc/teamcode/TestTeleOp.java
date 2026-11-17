@@ -20,8 +20,8 @@ public class TestTeleOp extends OpMode {
     private WheelSubsystem wheelSubsystem;
     private StandardServoSubsystem standardServoSubsystem;
     private StandardServoCommand standardServoCommand;
-    //    private PIDFlywheelCommand pidFlywheelCommand;
-    private FlywheelCommand flywheelCommand;
+    private PIDFlywheelCommand pidFlywheelCommand;
+//    private FlywheelCommand flywheelCommand;
 
 
 
@@ -32,13 +32,13 @@ public class TestTeleOp extends OpMode {
         intakeSubsystem = new IntakeSubsystem(this);
         storageSubsystem = new StorageSubsystem(this);
         standardServoSubsystem = new StandardServoSubsystem(this);
-//        pidFlywheelCommand = new PIDFlywheelCommand(flywheelSubsystem2, gamepad2);
+       pidFlywheelCommand = new PIDFlywheelCommand(flywheelSubsystem2, gamepad2);
         intakeCommand = new IntakeCommand(intakeSubsystem, gamepad2);
         storageCommand = new StorageCommand(storageSubsystem, gamepad2);
         wheelSubsystem = new WheelSubsystem(this);
 
         standardServoCommand = new StandardServoCommand(standardServoSubsystem, gamepad2);
-        flywheelCommand = new FlywheelCommand(flywheelSubsystem2, gamepad2);
+//        flywheelCommand = new FlywheelCommand(flywheelSubsystem2, gamepad2);
 
 
     }
@@ -46,13 +46,13 @@ public class TestTeleOp extends OpMode {
 
     @Override
     public void loop(){
-//        pidFlywheelCommand.operate(gamepad1, telemetry);
-        storageCommand.operate(gamepad2);
+        pidFlywheelCommand.operate(gamepad1, telemetry);
+        storageCommand.operate(gamepad1);
         wheelSubsystem.robotOrientedOperate(gamepad1, telemetry);
 //        wheelSubsystem.operate(gamepad1, telemetry);
-        intakeCommand.operate(gamepad2);
+        intakeCommand.operate(gamepad1);
         standardServoCommand.operate(gamepad2);
-        flywheelCommand.operate(gamepad2);
+//        flywheelCommand.operate(gamepad2);
 
 
     }
