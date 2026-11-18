@@ -24,7 +24,7 @@ public class PIDFlywheelCommand {
 //        pidController.setSetPoint(3000);
         kp = 0.0065;
         kff = 0.0002;
-        setpoint = 2500;
+        setpoint = 2525;
         error = 0;
     }
     public void operate(Gamepad gamepad, Telemetry telemetry){

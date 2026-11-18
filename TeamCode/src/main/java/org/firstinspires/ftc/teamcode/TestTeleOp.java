@@ -61,6 +61,7 @@ public class TestTeleOp extends OpMode {
         wheelSubsystem.shutdown();
         storageCommand.shutdown();
         intakeCommand.shutdown();
+        pidFlywheelCommand.Shutdown();
 
     }
 }
