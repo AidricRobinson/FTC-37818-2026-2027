@@ -18,7 +18,7 @@ public class StandardServoCommand {
         }
 
 
-        else if (gamepad.dpad_right){
+        else if (gamepad.dpad_down){
             standardServoSubsystem.ServoPosition(1);
         }
     }
