@@ -4,29 +4,29 @@ package org.firstinspires.ftc.teamcode.Commands.TestCommands;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Subsystems.PollenFlywheelSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystems.FlywheelSubsystem;
 
 public class TestFlywheelCommand {
-    PollenFlywheelSubsystem pollenFlywheelSubsystem2;
+    FlywheelSubsystem flywheelSubsystem2;
     Gamepad gamepad;
     boolean toggle;
 
-    public TestFlywheelCommand(PollenFlywheelSubsystem pollenFlywheelSubsystem2, Gamepad gamepad){
-        this.pollenFlywheelSubsystem2 = pollenFlywheelSubsystem2;
+    public TestFlywheelCommand(FlywheelSubsystem flywheelSubsystem2, Gamepad gamepad){
+        this.flywheelSubsystem2 = flywheelSubsystem2;
         this.gamepad = gamepad;
         toggle = true;
     }
     public void operate(Gamepad gamepad, Telemetry telemetry){
         if(gamepad.y && toggle) {
-            pollenFlywheelSubsystem2.increaseTestOutput();
+            flywheelSubsystem2.increaseTestOutput();
             toggle = false;
         }
         else if (gamepad.a && toggle) {
-            pollenFlywheelSubsystem2.decreaseTestOutput();
+            flywheelSubsystem2.decreaseTestOutput();
             toggle = false;
         }
         else if (gamepad.b && toggle) {
-            pollenFlywheelSubsystem2.zeroTestOutput();
+            flywheelSubsystem2.zeroTestOutput();
             toggle = false;
         }
         else if (!gamepad.y && !gamepad.a && !gamepad.b){
@@ -36,17 +36,17 @@ public class TestFlywheelCommand {
 
 
         if(gamepad.x){
-            pollenFlywheelSubsystem2.setFlywheelPower(pollenFlywheelSubsystem2.getTestOutput());
+            flywheelSubsystem2.setFlywheelPower(flywheelSubsystem2.getTestOutput());
         }
         else{
-            pollenFlywheelSubsystem2.setFlywheelPower(0);
+            flywheelSubsystem2.setFlywheelPower(0);
         }
-        telemetry.addData("testOutput", pollenFlywheelSubsystem2.getTestOutput());
+        telemetry.addData("testOutput", flywheelSubsystem2.getTestOutput());
         telemetry.update();
     }
 
     // // test comment
     public void Shutdown(){
-        pollenFlywheelSubsystem2.shutdown();
+        flywheelSubsystem2.shutdown();
     }
 }

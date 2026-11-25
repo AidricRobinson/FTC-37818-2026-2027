@@ -7,7 +7,6 @@ public class StandardServoSubsystem{
 
     public StandardServoSubsystem(OpMode opMode){
         standardServo = opMode.hardwareMap.get(Servo.class, "standardServo");
-
     }
 
     public void ServoPosition(double position){

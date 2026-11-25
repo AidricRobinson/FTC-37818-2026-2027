@@ -4,14 +4,15 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Commands.Manual.Test.*;
+import org.firstinspires.ftc.teamcode.Commands.TestCommands.TestFlywheelCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.*;
 
 
-@TeleOp(name="RobotOriented")
+@TeleOp(name="FieldOriented")
 
 public class DriverTeleOp extends OpMode {
     //declaring subsystems and commands here
-    private PollenFlywheelSubsystem pollenFlywheelSubsystem2;
+    private FlywheelSubsystem flywheelSubsystem2;
     private IntakeSubsystem intakeSubsystem;
     private StorageSubsystem storageSubsystem;
     private IntakeCommand intakeCommand;
@@ -27,7 +28,7 @@ public class DriverTeleOp extends OpMode {
 
     public void init () {
 
-        pollenFlywheelSubsystem2 = new PollenFlywheelSubsystem(this);
+        flywheelSubsystem2 = new FlywheelSubsystem(this);
         intakeSubsystem = new IntakeSubsystem(this);
         storageSubsystem = new StorageSubsystem(this);
         standardServoSubsystem = new StandardServoSubsystem(this);
@@ -35,7 +36,7 @@ public class DriverTeleOp extends OpMode {
         storageCommand = new StorageCommand(storageSubsystem, gamepad1);
         wheelSubsystem = new WheelSubsystem(this);
         standardServoCommand = new StandardServoCommand(standardServoSubsystem, gamepad1);
-        pidFlywheelCommand = new PIDFlywheelCommand(pollenFlywheelSubsystem2, gamepad1);
+        pidFlywheelCommand = new PIDFlywheelCommand(flywheelSubsystem2, gamepad1);
 //
 
 
@@ -53,7 +54,7 @@ public class DriverTeleOp extends OpMode {
 
     }
     public void stop(){
-        pollenFlywheelSubsystem2.shutdown();
+        flywheelSubsystem2.shutdown();
         wheelSubsystem.shutdown();
         storageCommand.shutdown();
         intakeCommand.shutdown();
