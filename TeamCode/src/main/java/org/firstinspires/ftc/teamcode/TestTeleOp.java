@@ -47,10 +47,13 @@ public class TestTeleOp extends OpMode {
     @Override
     public void loop(){
         pidFlywheelCommand.operate(gamepad1, telemetry);
+        pidFlywheelCommand.operate(gamepad2, telemetry);
         storageCommand.operate(gamepad1);
+        storageCommand.operate(gamepad2);
         wheelSubsystem.robotOrientedOperate(gamepad1, telemetry);
 //        wheelSubsystem.operate(gamepad1, telemetry);
         intakeCommand.operate(gamepad1);
+        intakeCommand.operate(gamepad2);
         standardServoCommand.operate(gamepad2);
 //        flywheelCommand.operate(gamepad2);
 

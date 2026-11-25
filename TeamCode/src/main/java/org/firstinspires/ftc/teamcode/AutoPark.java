@@ -40,11 +40,11 @@ public class AutoPark extends LinearOpMode {
             while (opModeIsActive() && !isStopRequested()) {
                 //Wait 25 seconds and do nothing
 //                sleep(25000);
-                //Go forward at 30% speed for 1 second
-                leftFront.setPower(0.25);
+                //Go right at 30% speed for 1 second
+                leftFront.setPower(-0.25);
                 rightFront.setPower(0.25);
                 leftBack.setPower(0.25);
-                rightBack.setPower(0.25);
+                rightBack.setPower(-0.25);
                 sleep(1000);
                 //Stop the motors
                 leftFront.setPower(0);
