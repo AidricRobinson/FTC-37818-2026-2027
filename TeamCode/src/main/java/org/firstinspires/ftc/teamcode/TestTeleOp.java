@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.Commands.TestCommands.TestFlywheelCommand;
 import org.firstinspires.ftc.teamcode.Subsystems.*;
 
 
-@TeleOp(name="RobotOriented")
+@TeleOp(name="OnePersonDrive")
 
 public class TestTeleOp extends OpMode {
     //declaring subsystems and commands here
@@ -32,13 +32,12 @@ public class TestTeleOp extends OpMode {
         intakeSubsystem = new IntakeSubsystem(this);
         storageSubsystem = new StorageSubsystem(this);
         standardServoSubsystem = new StandardServoSubsystem(this);
-       pidFlywheelCommand = new PIDFlywheelCommand(flywheelSubsystem2, gamepad2);
-        intakeCommand = new IntakeCommand(intakeSubsystem, gamepad2);
-        storageCommand = new StorageCommand(storageSubsystem, gamepad2);
+        intakeCommand = new IntakeCommand(intakeSubsystem, gamepad1);
+        storageCommand = new StorageCommand(storageSubsystem, gamepad1);
         wheelSubsystem = new WheelSubsystem(this);
-
-        standardServoCommand = new StandardServoCommand(standardServoSubsystem, gamepad2);
-//        flywheelCommand = new FlywheelCommand(flywheelSubsystem2, gamepad2);
+        standardServoCommand = new StandardServoCommand(standardServoSubsystem, gamepad1);
+        pidFlywheelCommand = new PIDFlywheelCommand(flywheelSubsystem2, gamepad1);
+//
 
 
     }
@@ -46,17 +45,12 @@ public class TestTeleOp extends OpMode {
 
     @Override
     public void loop(){
-        pidFlywheelCommand.operate(gamepad1, telemetry);
-        pidFlywheelCommand.operate(gamepad2, telemetry);
+//        pidFlywheelCommand.operate(gamepad1, telemetry);
+        wheelSubsystem.fieldOrientedOperate(gamepad1, telemetry);
         storageCommand.operate(gamepad1);
-        storageCommand.operate(gamepad2);
-        wheelSubsystem.robotOrientedOperate(gamepad1, telemetry);
-//        wheelSubsystem.operate(gamepad1, telemetry);
         intakeCommand.operate(gamepad1);
-        intakeCommand.operate(gamepad2);
-        standardServoCommand.operate(gamepad2);
-//        flywheelCommand.operate(gamepad2);
-
+        standardServoCommand.operate(gamepad1);
+        pidFlywheelCommand.operate(gamepad1f, telemetry);
 
     }
     public void stop(){
@@ -64,7 +58,6 @@ public class TestTeleOp extends OpMode {
         wheelSubsystem.shutdown();
         storageCommand.shutdown();
         intakeCommand.shutdown();
-        pidFlywheelCommand.Shutdown();
 
     }
 }
