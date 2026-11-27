@@ -33,14 +33,14 @@ public class WheelSubsystem {
 
     public WheelSubsystem(OpMode opMode) {
 
-        imu = opMode.hardwareMap.get(BNO055IMU.class, "imu");
-        BNO055IMU.Parameters IMUparameters = new BNO055IMU.Parameters();
-        imu.initialize(IMUparameters);
-
         FLMotor = opMode.hardwareMap.get(DcMotorEx.class, "FL");
         FRMotor = opMode.hardwareMap.get(DcMotorEx.class, "FR");
         BLMotor = opMode.hardwareMap.get(DcMotorEx.class, "BL");
         BRMotor = opMode.hardwareMap.get(DcMotorEx.class, "BR");
+
+        imu = opMode.hardwareMap.get(BNO055IMU.class, "imu");
+        BNO055IMU.Parameters IMUparameters = new BNO055IMU.Parameters();
+        imu.initialize(IMUparameters);
 
         FLMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);
         BLMotor.setMode(DcMotorEx.RunMode.RUN_WITHOUT_ENCODER);

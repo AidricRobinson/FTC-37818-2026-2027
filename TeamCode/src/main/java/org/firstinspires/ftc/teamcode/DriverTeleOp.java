@@ -46,11 +46,11 @@ public class DriverTeleOp extends OpMode {
     @Override
     public void loop(){
 //        pidFlywheelCommand.operate(gamepad1, telemetry);
-        storageCommand.operate(gamepad1);
         wheelSubsystem.fieldOrientedOperate(gamepad1, telemetry);
-        intakeCommand.operate(gamepad1);
-        standardServoCommand.operate(gamepad1);
-        pidFlywheelCommand.operate(gamepad1, telemetry);
+        storageCommand.operate(gamepad2);
+        intakeCommand.operate(gamepad2);
+        standardServoCommand.operate(gamepad2);
+        pidFlywheelCommand.operate(gamepad2, telemetry);
 
     }
     public void stop(){

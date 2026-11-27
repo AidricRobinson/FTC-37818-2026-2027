@@ -13,7 +13,7 @@ public class AutoDriveCommand {
         this.wheelSubsystem = wheelSubsystem;
     }
     public void AutoDrive(double distanceInches) {
-        this.pidController = new PIDController(0.0001, 0.05);
+        this.pidController = new PIDController(0.0009/*kP tbd*/, 0.07) ;
         wheelSubsystem.resetEncoder();
         setPoint = distanceInches * Constants.EncoderConstants.kCOUNTS_PER_INCH;
         pidController.setSetPoint(setPoint);
@@ -31,7 +31,7 @@ public class AutoDriveCommand {
         wheelSubsystem.shutdown();
     }
     public void AutoStrafe(double distanceInches){
-        this.pidController = new PIDController(0.0001, 0.05);
+        this.pidController = new PIDController(0.0009/*kP tbd*/, 0.1);
         setPoint = distanceInches * Constants.EncoderConstants.kCOUNTS_PER_INCH;
         pidController.setSetPoint(setPoint);
         while(true){
