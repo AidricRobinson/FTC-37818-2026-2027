@@ -50,7 +50,7 @@ public class TestTeleOp extends OpMode {
         storageCommand.operate(gamepad1);
         intakeCommand.operate(gamepad1);
         standardServoCommand.operate(gamepad1);
-        pidFlywheelCommand.operate(gamepad1f, telemetry);
+        pidFlywheelCommand.operate(gamepad1, telemetry);
 
     }
     public void stop(){
